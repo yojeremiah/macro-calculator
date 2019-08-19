@@ -70,32 +70,6 @@
           <form class="p-2 p-sm-3">
             <div class="form-header text-center">
               <h3>Body Stats</h3>
-              <div class="form-group mb-2 mb-sm-3">
-                <!-- Sex Selection -->
-                <div class="form-check form-check-inline">
-                  <!-- Male -->
-                  <input
-                    type="radio"
-                    class="form-check-input"
-                    name="sex"
-                    id="male"
-                    value="male"
-                    checked
-                  />
-                  <label for="male" class="form-check-label">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <!-- Female -->
-                  <input
-                    type="radio"
-                    class="form-check-input"
-                    name="sex"
-                    id="female"
-                    value="female"
-                  />
-                  <label for="metric" class="form-check-label">Female</label>
-                </div>
-              </div>
             </div>
 
             <!-- Age Input -->
@@ -135,6 +109,38 @@
               />
               <small id="weight-help" class="form-text text-muted"
                 >Enter your current weight (in kilograms or pounds)</small
+              >
+            </div>
+            <!-- Sex Selection -->
+            <div class="form-group">
+              <label for="radios">Sex</label>
+              <div id="radios">
+                <div class="form-check form-check-inline">
+                  <!-- Male -->
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    name="sex"
+                    id="male"
+                    value="male"
+                    checked
+                  />
+                  <label for="male" class="form-check-label">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <!-- Female -->
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    name="sex"
+                    id="female"
+                    value="female"
+                  />
+                  <label for="female" class="form-check-label">Female</label>
+                </div>
+              </div>
+              <small id="height-help" class="form-text text-muted"
+                >Select your biological sex (male or female)</small
               >
             </div>
             <!-- Submit Button -->
