@@ -26,39 +26,43 @@
           <!-- Header -->
           <header class="text-center border-bottom pb-3">
             <h1>Macro Calculator</h1>
-            <p class="lead">
+            <p class="lead mb-1">
               Enter your stats and let the macro-magic happen!
             </p>
+            <p class="text-secondary mb-2">
+              <small
+                >(Be sure to select your appropriate measurement system
+                below)</small
+              >
+            </p>
             <!-- Units Selection -->
-            <div class="text-center">
-              <h5>Units of Measurement</h5>
-              <div class="form-check form-check-inline">
-                <!-- Metric (cm/kg) -->
-                <input
-                  type="radio"
-                  class="form-check-input"
-                  name="units"
-                  id="metric"
-                  value="m"
-                  checked
-                />
-                <label for="metric" class="form-check-label"
-                  >Metric (cm/kg)</label
-                >
-              </div>
-              <div class="form-check form-check-inline">
-                <!-- Imperial (in/lb) -->
-                <input
-                  type="radio"
-                  class="form-check-input"
-                  name="units"
-                  id="imperial"
-                  value="i"
-                />
-                <label for="metric" class="form-check-label"
-                  >Imperial (in/lb)</label
-                >
-              </div>
+            <h5>Units of Measurement</h5>
+            <div class="form-check form-check-inline">
+              <!-- Metric (cm/kg) -->
+              <input
+                type="radio"
+                class="form-check-input"
+                name="units"
+                id="metric"
+                value="m"
+                checked
+              />
+              <label for="metric" class="form-check-label"
+                >Metric (cm/kg)</label
+              >
+            </div>
+            <div class="form-check form-check-inline">
+              <!-- Imperial (in/lb) -->
+              <input
+                type="radio"
+                class="form-check-input"
+                name="units"
+                id="imperial"
+                value="i"
+              />
+              <label for="metric" class="form-check-label"
+                >Imperial (in/lb)</label
+              >
             </div>
           </header>
 
@@ -103,7 +107,7 @@
                 id="age"
                 placeholder="Current age"
               />
-              <small id="ageHelpText" class="form-text text-muted"
+              <small id="age-help" class="form-text text-muted"
                 >Enter your current age (in years)</small
               >
             </div>
@@ -116,7 +120,7 @@
                 id="height"
                 placeholder="Current height"
               />
-              <small id="heightHelp" class="form-text text-muted"
+              <small id="height-help" class="form-text text-muted"
                 >Enter your current height (in centimeters or inches)</small
               >
             </div>
@@ -129,7 +133,7 @@
                 id="weight"
                 placeholder="Current weight"
               />
-              <small id="heightHelp" class="form-text text-muted"
+              <small id="weight-help" class="form-text text-muted"
                 >Enter your current weight (in kilograms or pounds)</small
               >
             </div>
@@ -138,8 +142,204 @@
               type="submit"
               class="btn btn-block btn-primary shadow-sm"
               value="Calculate Macros 💪"
+              id="btn-submit"
             />
           </form>
+
+          <!-- Loading -->
+          <section class="loading-container py-3 px-2 px-sm-3 border-top">
+            <div class="alert alert-primary text-center" role="alert">
+              Calculating your personalized macros...
+            </div>
+            <div class="progress">
+              <div
+                class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                role="progressbar"
+                aria-valuenow="100"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="width: 100%"
+              ></div>
+            </div>
+          </section>
+
+          <!-- Results -->
+          <section class="results-container p-2 p-sm-3 border-top">
+            <div class="results-header text-center">
+              <h3>Your Macros</h3>
+              <p class="mb-2">
+                Remember, these nutritional values are only <u>estimates</u>!
+              </p>
+              <p class="text-secondary">
+                <small
+                  >You may need to adjust your nutrition based on how your body
+                  is responding after 2-3 weeks. Be sure to monitor your weekly
+                  average weight and adjust your calories/macros as
+                  needed.</small
+                >
+              </p>
+            </div>
+            <!-- Accordian for results -->
+            <div class="accordion" id="results-accordian">
+              <!-- Cutting Results -->
+              <div class="card">
+                <div class="card-header" id="heading-cutting">
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-primary btn-block shadow-sm collapsed"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#collapse-cutting"
+                      aria-expanded="false"
+                      aria-controls="collapse-cutting"
+                    >
+                      Cutting
+                    </button>
+                  </h2>
+                </div>
+
+                <div
+                  id="collapse-cutting"
+                  class="collapse"
+                  aria-labelledby="heading-cutting"
+                  data-parent="#results-accordian"
+                >
+                  <div class="card-body pb-0">
+                    <p class="text-center text-secondary">
+                      <small
+                        >Use the following macros if your primary goal is to
+                        lose weight and body fat</small
+                      >
+                    </p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Calories</th>
+                          <th scope="col">Protein</th>
+                          <th scope="col">Carbs</th>
+                          <th scope="col">Fats</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">
+                            <span id="cutting-calories">2000</span> kcal
+                          </th>
+                          <td><span id="cutting-protein">200</span>g</td>
+                          <td><span id="cutting-carbs">200</span>g</td>
+                          <td><span id="cutting-fats">200</span>g</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!-- Maintenance Results -->
+              <div class="card">
+                <div class="card-header" id="heading-maintain">
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-primary btn-block shadow-sm collapsed"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#collapse-maintain"
+                      aria-expanded="true"
+                      aria-controls="collapse-maintain"
+                    >
+                      Maintenance
+                    </button>
+                  </h2>
+                </div>
+                <div
+                  id="collapse-maintain"
+                  class="collapse show"
+                  aria-labelledby="heading-maintain"
+                  data-parent="#results-accordian"
+                >
+                  <div class="card-body pb-0">
+                    <p class="text-center text-secondary">
+                      <small
+                        >Use the following macros if your primary goal is to
+                        maintain your current physique</small
+                      >
+                    </p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Calories</th>
+                          <th scope="col">Protein</th>
+                          <th scope="col">Carbs</th>
+                          <th scope="col">Fats</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">
+                            <span id="maintain-calories">2000</span> kcal
+                          </th>
+                          <td><span id="maintain-protein">200</span>g</td>
+                          <td><span id="maintain-carbs">200</span>g</td>
+                          <td><span id="maintain-fats">200</span>g</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- Bulking Results -->
+              </div>
+              <div class="card">
+                <div class="card-header" id="heading-bulking">
+                  <h2 class="mb-0">
+                    <button
+                      class="btn btn-primary btn-block shadow-sm collapsed"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#collapse-bulking"
+                      aria-expanded="false"
+                      aria-controls="collapse-bulking"
+                    >
+                      Bulking
+                    </button>
+                  </h2>
+                </div>
+                <div
+                  id="collapse-bulking"
+                  class="collapse"
+                  aria-labelledby="heading-bulking"
+                  data-parent="#results-accordian"
+                >
+                  <div class="card-body pb-0">
+                    <p class="text-center text-secondary">
+                      <small
+                        >Use the following macros if your primary goal is to
+                        gain weight and build muscle</small
+                      >
+                    </p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Calories</th>
+                          <th scope="col">Protein</th>
+                          <th scope="col">Carbs</th>
+                          <th scope="col">Fats</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">
+                            <span id="bulking-calories">2000</span> kcal
+                          </th>
+                          <td><span id="bulking-protein">200</span>g</td>
+                          <td><span id="bulking-carbs">200</span>g</td>
+                          <td><span id="bulking-fats">200</span>g</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>
