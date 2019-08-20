@@ -22,17 +22,17 @@
     <div class="container">
       <!-- Card for page content -->
       <div class="row">
-        <div class="card col-xs-10 col-lg-8 mx-auto p-3 shadow">
+        <div class="card col-xs-12 col-md-10 col-lg-8 mx-auto p-3 shadow">
           <!-- Header -->
           <header class="text-center border-bottom pb-3">
             <h1>Macro Calculator</h1>
             <p class="lead mb-1">
-              Enter your stats and let the macro-magic happen!
+              Enter your stats and let the macro magic happen!
             </p>
             <p class="text-secondary mb-2">
               <small
-                >(Be sure to select your appropriate measurement system
-                below)</small
+                >Be sure to select your appropriate units of measurement
+                below</small
               >
             </p>
             <!-- Units Selection -->
@@ -189,6 +189,7 @@
             <div class="accordion" id="results-accordian">
               <!-- Cutting Results -->
               <div class="card">
+                <!-- Cutting results button -->
                 <div class="card-header" id="heading-cutting">
                   <h2 class="mb-0">
                     <button
@@ -203,7 +204,7 @@
                     </button>
                   </h2>
                 </div>
-
+                <!-- Cutting collapse content -->
                 <div
                   id="collapse-cutting"
                   class="collapse"
@@ -217,7 +218,81 @@
                         lose weight and body fat</small
                       >
                     </p>
-                    <table class="table">
+                    <!-- Cutting mobile display-->
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Calories</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="cutting-calories-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="2000 kcal"
+                        disabled
+                      />
+                    </div>
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Protein</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="cutting-protein-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="000g"
+                        disabled
+                      />
+                    </div>
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Carbs</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="cutting-carbs-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="000g"
+                        disabled
+                      />
+                    </div>
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Fats</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="cutting-fats-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="000g"
+                        disabled
+                      />
+                    </div>
+                    <!-- Cutting desktop table display -->
+                    <table class="table d-none d-sm-table">
                       <thead>
                         <tr>
                           <th scope="col">Calories</th>
@@ -242,6 +317,7 @@
               </div>
               <!-- Maintenance Results -->
               <div class="card">
+                <!-- Maintenance results button -->
                 <div class="card-header" id="heading-maintain">
                   <h2 class="mb-0">
                     <button
@@ -256,6 +332,7 @@
                     </button>
                   </h2>
                 </div>
+                <!-- Maintenance Collapse Content -->
                 <div
                   id="collapse-maintain"
                   class="collapse show"
@@ -269,7 +346,81 @@
                         maintain your current physique</small
                       >
                     </p>
-                    <table class="table">
+                    <!-- Maintenance mobile display-->
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Calories</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="maintain-calories-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="2000 kcal"
+                        disabled
+                      />
+                    </div>
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Protein</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="maintain-protein-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="000g"
+                        disabled
+                      />
+                    </div>
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Carbs</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="maintain-carbs-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="000g"
+                        disabled
+                      />
+                    </div>
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Fats</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="maintain-fats-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="000g"
+                        disabled
+                      />
+                    </div>
+                    <!-- Maintenance desktop table display -->
+                    <table class="table d-none d-sm-table">
                       <thead>
                         <tr>
                           <th scope="col">Calories</th>
@@ -294,6 +445,7 @@
                 <!-- Bulking Results -->
               </div>
               <div class="card">
+                <!-- Bulking results button -->
                 <div class="card-header" id="heading-bulking">
                   <h2 class="mb-0">
                     <button
@@ -308,6 +460,7 @@
                     </button>
                   </h2>
                 </div>
+                <!-- Bulking Collapse Content -->
                 <div
                   id="collapse-bulking"
                   class="collapse"
@@ -321,7 +474,81 @@
                         gain weight and build muscle</small
                       >
                     </p>
-                    <table class="table">
+                    <!-- Bulking mobile display -->
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Calories</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="bulking-calories-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="2000 kcal"
+                        disabled
+                      />
+                    </div>
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Protein</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="bulking-protein-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="000g"
+                        disabled
+                      />
+                    </div>
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Carbs</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="bulking-carbs-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="000g"
+                        disabled
+                      />
+                    </div>
+                    <div class="input-group input-group-sm mb-3 d-sm-none">
+                      <div class="input-group-prepend">
+                        <span
+                          class="input-group-text font-weight-bold"
+                          id="inputGroup-sizing-sm"
+                          >Fats</span
+                        >
+                      </div>
+                      <input
+                        type="text"
+                        id="bulking-fats-mobile"
+                        class="form-control text-center"
+                        aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value="000g"
+                        disabled
+                      />
+                    </div>
+                    <!-- Bulking desktop table display -->
+                    <table class="table d-none d-sm-table">
                       <thead>
                         <tr>
                           <th scope="col">Calories</th>
