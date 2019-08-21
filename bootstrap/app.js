@@ -2,12 +2,14 @@
 // INPUTS
 const metric = document.querySelector('#metric');
 const imperial = document.querySelector('#imperial');
+const unitRadios = document.getElementsByName('units');
 const age = document.querySelector('#age');
 const height = document.querySelector('#height');
 const weight = document.querySelector('#weight');
 const male = document.querySelector('#male');
 const female = document.querySelector('#female');
-const submit = document.querySelector('#btn-submit');
+const btnSubmit = document.querySelector('#btn-submit');
+const sexRadios = document.getElementsByName('sex');
 // OUTPUTS
 // Cutting
 const cuttingCalsMobile = document.querySelector('#cutting-calories-mobile');
@@ -38,3 +40,41 @@ const bulkingCals = document.querySelector('#bulking-calories');
 const bulkingProtein = document.querySelector('#bulking-protein');
 const bulkingCarbs = document.querySelector('#bulking-carbs');
 const bulkingFats = document.querySelector('#bulking-fats');
+
+// User-Info Object (for body stat inputs)
+const userBodyStats = {
+  units: 'metric',
+  age: 0,
+  height: 0,
+  weight: 0,
+  sex: 'male'
+};
+
+// Event listener for the submit button
+btnSubmit.addEventListener('click', parseInputs);
+
+// Parse form inputs for user body stats
+// Store input values in user-info object
+function parseInputs(e) {
+  // Prevent default submit action
+  e.preventDefault();
+  // Units of measurement
+  for (let i = 0; i < unitRadios.length; i++) {
+    if (unitRadios[i].checked) {
+      userBodyStats.units = unitRadios[i].value;
+    }
+  }
+  // Age
+  userBodyStats.age = age.value;
+  // Height
+  userBodyStats.height = height.value;
+  // Weight
+  userBodyStats.weight = weight.value;
+  // Sex
+  for (let i = 0; i < sexRadios.length; i++) {
+    if (sexRadios[i].checked) {
+      userBodyStats.sex = sexRadios[i].value;
+    }
+  }
+  console.log(userBodyStats);
+}
