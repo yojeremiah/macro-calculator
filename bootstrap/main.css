@@ -1,3 +1,17 @@
+/* Equal width for text in mobile results input */
 .input-group-text {
   min-width: 4.5rem;
+}
+
+/* Cursors for radios */
+input[type='radio']:hover {
+  cursor: pointer;
+}
+
+/* Hide loading & results by default */
+.loading-container {
+  display: none;
+}
+.results-container {
+  display: none;
 }
