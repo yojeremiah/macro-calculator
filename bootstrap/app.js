@@ -22,9 +22,7 @@ const cuttingCarbs = document.querySelector('#cutting-carbs');
 const cuttingFats = document.querySelector('#cutting-fats');
 // Maintenance
 const maintainCalsMobile = document.querySelector('#maintain-calories-mobile');
-const maintainProteinMobile = document.querySelector(
-  '#maintain-protein-mobile'
-);
+const maintainProteinMobile = document.querySelector('#maintain-protein-mobile');
 const maintainCarbsMobile = document.querySelector('#maintain-carbs-mobile');
 const maintainFatsMobile = document.querySelector('#maintain-fats-mobile');
 const maintainCals = document.querySelector('#maintain-calories');
@@ -41,6 +39,14 @@ const bulkingProtein = document.querySelector('#bulking-protein');
 const bulkingCarbs = document.querySelector('#bulking-carbs');
 const bulkingFats = document.querySelector('#bulking-fats');
 
+// Test values 
+// MALE
+// (200lbs, 72in, 24yrs == 2048 cals TDEE)
+// (91kg, 183cm, 24yrs == 2049 cals TDEE)
+// FEMALE
+// (120lbs, 64in, 30yrs == 1329 cals TDEE)
+// (54 kg, 163cm, 30yrs == 1321 cals TDEE)
+
 // User-Info Object (for body stat inputs)
 const userBodyStats = {
   units: 'metric',
@@ -50,14 +56,22 @@ const userBodyStats = {
   sex: 'male'
 };
 
+// User-Macros object
+const userMacros = {
+  tdee: 0,
+  cuttingCalories: 0,
+  maintenanceCalories: 0,
+  bulkingCalories: 0
+};
+
 // Event listener for the submit button
 btnSubmit.addEventListener('click', parseInputs);
 
 // Parse form inputs for user body stats
-// Store input values in user-info object
 function parseInputs(e) {
   // Prevent default submit action
   e.preventDefault();
+  // Store input values in user-info object
   // Units of measurement
   for (let i = 0; i < unitRadios.length; i++) {
     if (unitRadios[i].checked) {
@@ -77,4 +91,58 @@ function parseInputs(e) {
     }
   }
   console.log(userBodyStats);
+  calculateTDEE();
+  console.log(userMacros);
 }
+
+// Calculate TDEE based on body stats
+function calculateTDEE() {
+  // Check for units of measurement
+  // Metric calculations
+  if (userBodyStats.units === 'metric') {
+    // Male formula
+    if (userBodyStats.sex === 'male') {
+      // Metric male BMR calculation
+      let BMR = 88 + (13.4 * userBodyStats.weight) + (4.8 * userBodyStats.height) - (5.7 * userBodyStats.age);
+      // TDEE (adjust BMR with activity multiplier - 1.2 for estimate)
+      userMacros.tdee = 1.2 * BMR;
+    }
+    // Female formula
+    else if (userBodyStats.sex === 'female') {
+      // Metric female BMR calculation
+      let BMR = 448 + (9.2 * userBodyStats.weight) + (3.1 * userBodyStats.height) - (4.3 * userBodyStats.age);
+      // TDEE (adjust BMR with activity multiplier - 1.2 for estimate)
+      userMacros.tdee = 1.2 * BMR;
+    }
+    // Invalid sex
+    else {
+      console.log(`Invalid sex. "${userBodyStats.sex}" is not a valid selection.`);
+    }
+  }
+  // Imperial calculations
+  else if (userBodyStats.units === 'imperial') {
+    // Male formula
+    if (userBodyStats.sex === 'male') {
+      // Imperial male BMR calculation
+      let BMR = 88 + (6.1 * userBodyStats.weight) + (12.2 * userBodyStats.height) - (5.7 * userBodyStats.age);
+      // TDEE (adjust BMR with activity multiplier - 1.2 for estimate)
+      userMacros.tdee = 1.2 * BMR;
+    }
+    // Female formula
+    else if (userBodyStats.sex === 'female') {
+      // Imperial female BMR calculation
+      let BMR = 448 + (4.2 * userBodyStats.weight) + (7.9 * userBodyStats.height) - (4.3 * userBodyStats.age);
+      // TDEE (adjust BMR with activity multiplier - 1.2 for estimate)
+      userMacros.tdee = 1.2 * BMR;
+    }
+    // Invalid sex
+    else {
+      console.log(`Invalid sex. "${userBodyStats.sex}" is not a valid selection.`);
+    }
+  }
+  // Invalid unit of measurement
+  else {
+    console.log(`Invalid unit of measurement. "${userBodyStats.units}" is not a valid selection.`);
+  }
+}
+
