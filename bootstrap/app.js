@@ -41,11 +41,11 @@ const bulkingFats = document.querySelector('#bulking-fats');
 
 // Test values 
 // MALE
-// (200lbs, 72in, 24yrs == 2048 cals TDEE)
-// (91kg, 183cm, 24yrs == 2049 cals TDEE)
+// (200lbs, 72in, 24yrs == 2458 cals TDEE)
+// (91kg, 183cm, 24yrs == 2458 cals TDEE)
 // FEMALE
-// (120lbs, 64in, 30yrs == 1329 cals TDEE)
-// (54 kg, 163cm, 30yrs == 1321 cals TDEE)
+// (120lbs, 64in, 30yrs == 1595 cals TDEE)
+// (54 kg, 163cm, 30yrs == 1585 cals TDEE)
 
 // User-Info Object (for body stat inputs)
 const userBodyStats = {
@@ -59,9 +59,25 @@ const userBodyStats = {
 // User-Macros object
 const userMacros = {
   tdee: 0,
-  cuttingCalories: 0,
-  maintenanceCalories: 0,
-  bulkingCalories: 0
+  cutting: {
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fats: 0
+  },
+  maintain: {
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fats: 0
+  },
+  bulking: {
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fats: 0
+  },
+
 };
 
 // Event listener for the submit button
@@ -92,7 +108,8 @@ function parseInputs(e) {
   }
   console.log(userBodyStats);
   calculateTDEE();
-  console.log(userMacros);
+  calculateMacros();
+  console.log(userMacros)
 }
 
 // Calculate TDEE based on body stats
@@ -104,15 +121,15 @@ function calculateTDEE() {
     if (userBodyStats.sex === 'male') {
       // Metric male BMR calculation
       let BMR = 88 + (13.4 * userBodyStats.weight) + (4.8 * userBodyStats.height) - (5.7 * userBodyStats.age);
-      // TDEE (adjust BMR with activity multiplier - 1.2 for estimate)
-      userMacros.tdee = 1.2 * BMR;
+      // TDEE (adjust BMR with activity multiplier - 1.25 for estimate)
+      userMacros.tdee = 1.25 * BMR;
     }
     // Female formula
     else if (userBodyStats.sex === 'female') {
       // Metric female BMR calculation
       let BMR = 448 + (9.2 * userBodyStats.weight) + (3.1 * userBodyStats.height) - (4.3 * userBodyStats.age);
-      // TDEE (adjust BMR with activity multiplier - 1.2 for estimate)
-      userMacros.tdee = 1.2 * BMR;
+      // TDEE (adjust BMR with activity multiplier - 1.25 for estimate)
+      userMacros.tdee = 1.25 * BMR;
     }
     // Invalid sex
     else {
@@ -125,15 +142,15 @@ function calculateTDEE() {
     if (userBodyStats.sex === 'male') {
       // Imperial male BMR calculation
       let BMR = 88 + (6.1 * userBodyStats.weight) + (12.2 * userBodyStats.height) - (5.7 * userBodyStats.age);
-      // TDEE (adjust BMR with activity multiplier - 1.2 for estimate)
-      userMacros.tdee = 1.2 * BMR;
+      // TDEE (adjust BMR with activity multiplier - 1.25 for estimate)
+      userMacros.tdee = 1.25 * BMR;
     }
     // Female formula
     else if (userBodyStats.sex === 'female') {
       // Imperial female BMR calculation
       let BMR = 448 + (4.2 * userBodyStats.weight) + (7.9 * userBodyStats.height) - (4.3 * userBodyStats.age);
-      // TDEE (adjust BMR with activity multiplier - 1.2 for estimate)
-      userMacros.tdee = 1.2 * BMR;
+      // TDEE (adjust BMR with activity multiplier - 1.25 for estimate)
+      userMacros.tdee = 1.25 * BMR;
     }
     // Invalid sex
     else {
@@ -144,5 +161,40 @@ function calculateTDEE() {
   else {
     console.log(`Invalid unit of measurement. "${userBodyStats.units}" is not a valid selection.`);
   }
+  calculateMacros();
+}
+
+// Calculate total calories and macro breakdowns
+function calculateMacros() {
+  // Cutting
+  // 500 calorie deficit
+  userMacros.cutting.calories = userMacros.tdee - 500;
+  // 2.2g/kg or 1g/lb protein
+  userMacros.cutting.protein = (userBodyStats.units === 'metric') ? userBodyStats.weight * 2.2 : userBodyStats.weight * 1;
+  // .25% of total calories for fats (9cals in 1g of fats)
+  userMacros.cutting.fats = (0.25 * userMacros.cutting.calories) / 9;
+  // Remaining calories for carbs (4cals in 1g of carbs)
+  userMacros.cutting.carbs = (userMacros.cutting.calories - ((userMacros.cutting.protein * 4) + (userMacros.cutting.fats * 9))) / 4;
+  
+
+  // Maintenance
+  // No calorie deficit
+  userMacros.maintain.calories = userMacros.tdee;
+  // 2.2g/kg or 1g/lb protein
+  userMacros.maintain.protein = (userBodyStats.units === 'metric') ? userBodyStats.weight * 2.2 : userBodyStats.weight * 1;
+  // .25% of total calories for fats (9cals in 1g of fats)
+  userMacros.maintain.fats = (0.25 * userMacros.maintain.calories) / 9;
+  // Remaining calories for carbs (4cals in 1g of carbs)
+  userMacros.maintain.carbs = (userMacros.maintain.calories - ((userMacros.maintain.protein * 4) + (userMacros.maintain.fats * 9))) / 4;
+
+  // Bulking
+  // 250 calorie surplus
+  userMacros.bulking.calories = userMacros.tdee + 250;
+  // 2.2g/kg or 1g/lb protein
+  userMacros.bulking.protein = (userBodyStats.units === 'metric') ? userBodyStats.weight * 2.2 : userBodyStats.weight * 1;
+  // .25% of total calories for fats (9cals in 1g of fats)
+  userMacros.bulking.fats = (0.25 * userMacros.bulking.calories) / 9;
+  // Remaining calories for carbs (4cals in 1g of carbs)
+  userMacros.bulking.carbs = (userMacros.bulking.calories - ((userMacros.bulking.protein * 4) + (userMacros.bulking.fats * 9))) / 4;
 }
 
