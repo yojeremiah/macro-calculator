@@ -13,5 +13,9 @@ input[type='radio']:hover {
   display: none;
 }
 .results-container {
+  display: none;
+}
+/* Display utility class */
+.display {
   display: block;
 }

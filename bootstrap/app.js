@@ -1,4 +1,7 @@
 // DOM ELEMENTS
+const loading = document.querySelector('.loading-container');
+const results = document.querySelector('.results-container');
+const inputForm = document.querySelector('.form');
 // INPUTS
 const metric = document.querySelector('#metric');
 const imperial = document.querySelector('#imperial');
@@ -80,10 +83,24 @@ const userMacros = {
 
 };
 
-// Initialize/clear form values (page refresh)
+// Initialize form and displays when page loads
+window.onload = function() {
+  inputForm.reset();
+  loading.classList.remove('display');
+  results.classList.remove('display');
+}
 
 // Event listener for the submit button
-btnSubmit.addEventListener('click', parseInputs);
+btnSubmit.addEventListener('click', submit);
+
+// Main function (calls all sub-functions)
+function submit(e) {
+  parseInputs(e);
+  calculateTDEE()
+  calculateMacros();
+  displayMacros();
+  showResults();
+}
 
 // Parse form inputs for user body stats
 function parseInputs(e) {
@@ -108,10 +125,6 @@ function parseInputs(e) {
       userBodyStats.sex = sexRadios[i].value;
     }
   }
-  console.log(userBodyStats);
-  calculateTDEE();
-  calculateMacros();
-  console.log(userMacros)
 }
 
 // Calculate TDEE based on body stats
@@ -200,7 +213,7 @@ function calculateMacros() {
   userMacros.bulking.carbs = Math.floor((userMacros.bulking.calories - ((userMacros.bulking.protein * 4) + (userMacros.bulking.fats * 9))) / 4);
 }
 
-// Display macro and calorie values on the DOM
+// Display calorie and macro values to the DOM
 function displayMacros(){
   // Cutting
   cuttingCals.innerText = userMacros.cutting.calories;
@@ -229,4 +242,13 @@ function displayMacros(){
   bulkingCarbsMobile.value = `${userMacros.bulking.carbs}g`;
   bulkingFats.innerText = userMacros.bulking.fats;
   bulkingFatsMobile.value = `${userMacros.bulking.fats}g`;
+}
+
+// Display the loading and results messages
+function showResults() {
+  loading.classList.toggle('display');
+  setTimeout(function() {
+    loading.classList.toggle('display');
+    results.classList.toggle('display');
+  }, 2000);
 }
