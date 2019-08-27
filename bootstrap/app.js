@@ -80,6 +80,8 @@ const userMacros = {
 
 };
 
+// Initialize/clear form values (page refresh)
+
 // Event listener for the submit button
 btnSubmit.addEventListener('click', parseInputs);
 
@@ -164,37 +166,67 @@ function calculateTDEE() {
   calculateMacros();
 }
 
-// Calculate total calories and macro breakdowns
+// Calculate total calories and macro breakdowns based on TDEE
 function calculateMacros() {
   // Cutting
   // 500 calorie deficit
   userMacros.cutting.calories = userMacros.tdee - 500;
   // 2.2g/kg or 1g/lb protein
-  userMacros.cutting.protein = (userBodyStats.units === 'metric') ? userBodyStats.weight * 2.2 : userBodyStats.weight * 1;
+  userMacros.cutting.protein = (userBodyStats.units === 'metric') ? Math.floor(userBodyStats.weight * 2.2) : userBodyStats.weight * 1;
   // .25% of total calories for fats (9cals in 1g of fats)
-  userMacros.cutting.fats = (0.25 * userMacros.cutting.calories) / 9;
+  userMacros.cutting.fats = Math.floor((0.25 * userMacros.cutting.calories) / 9);
   // Remaining calories for carbs (4cals in 1g of carbs)
-  userMacros.cutting.carbs = (userMacros.cutting.calories - ((userMacros.cutting.protein * 4) + (userMacros.cutting.fats * 9))) / 4;
+  userMacros.cutting.carbs = Math.floor((userMacros.cutting.calories - ((userMacros.cutting.protein * 4) + (userMacros.cutting.fats * 9))) / 4);
   
 
   // Maintenance
   // No calorie deficit
   userMacros.maintain.calories = userMacros.tdee;
   // 2.2g/kg or 1g/lb protein
-  userMacros.maintain.protein = (userBodyStats.units === 'metric') ? userBodyStats.weight * 2.2 : userBodyStats.weight * 1;
+  userMacros.maintain.protein = (userBodyStats.units === 'metric') ? Math.floor(userBodyStats.weight * 2.2) : userBodyStats.weight * 1;
   // .25% of total calories for fats (9cals in 1g of fats)
-  userMacros.maintain.fats = (0.25 * userMacros.maintain.calories) / 9;
+  userMacros.maintain.fats = Math.floor((0.25 * userMacros.maintain.calories) / 9);
   // Remaining calories for carbs (4cals in 1g of carbs)
-  userMacros.maintain.carbs = (userMacros.maintain.calories - ((userMacros.maintain.protein * 4) + (userMacros.maintain.fats * 9))) / 4;
+  userMacros.maintain.carbs = Math.floor((userMacros.maintain.calories - ((userMacros.maintain.protein * 4) + (userMacros.maintain.fats * 9))) / 4);
 
   // Bulking
   // 250 calorie surplus
   userMacros.bulking.calories = userMacros.tdee + 250;
   // 2.2g/kg or 1g/lb protein
-  userMacros.bulking.protein = (userBodyStats.units === 'metric') ? userBodyStats.weight * 2.2 : userBodyStats.weight * 1;
+  userMacros.bulking.protein = (userBodyStats.units === 'metric') ? Math.floor(userBodyStats.weight * 2.2) : userBodyStats.weight * 1;
   // .25% of total calories for fats (9cals in 1g of fats)
-  userMacros.bulking.fats = (0.25 * userMacros.bulking.calories) / 9;
+  userMacros.bulking.fats = Math.floor((0.25 * userMacros.bulking.calories) / 9);
   // Remaining calories for carbs (4cals in 1g of carbs)
-  userMacros.bulking.carbs = (userMacros.bulking.calories - ((userMacros.bulking.protein * 4) + (userMacros.bulking.fats * 9))) / 4;
+  userMacros.bulking.carbs = Math.floor((userMacros.bulking.calories - ((userMacros.bulking.protein * 4) + (userMacros.bulking.fats * 9))) / 4);
 }
 
+// Display macro and calorie values on the DOM
+function displayMacros(){
+  // Cutting
+  cuttingCals.innerText = userMacros.cutting.calories;
+  cuttingCalsMobile.value = `${userMacros.cutting.calories} kcal`;
+  cuttingProtein.innerText = userMacros.cutting.protein;
+  cuttingProteinMobile.value = `${userMacros.cutting.protein}g`;
+  cuttingCarbs.innerText = userMacros.cutting.carbs;
+  cuttingCarbsMobile.value = `${userMacros.cutting.carbs}g`;
+  cuttingFats.innerText = userMacros.cutting.fats;
+  cuttingFatsMobile.value = `${userMacros.cutting.fats}g`;
+  // Maintain
+  maintainCals.innerText = userMacros.maintain.calories;
+  maintainCalsMobile.value = `${userMacros.maintain.calories} kcal`;
+  maintainProtein.innerText = userMacros.maintain.protein;
+  maintainProteinMobile.value = `${userMacros.maintain.protein}g`;
+  maintainCarbs.innerText = userMacros.maintain.carbs;
+  maintainCarbsMobile.value = `${userMacros.maintain.carbs}g`;
+  maintainFats.innerText = userMacros.maintain.fats;
+  maintainFatsMobile.value = `${userMacros.maintain.fats}g`;
+  // Bulking
+  bulkingCals.innerText = userMacros.bulking.calories;
+  bulkingCalsMobile.value = `${userMacros.bulking.calories} kcal`;
+  bulkingProtein.innerText = userMacros.bulking.protein;
+  bulkingProteinMobile.value = `${userMacros.bulking.protein}g`;
+  bulkingCarbs.innerText = userMacros.bulking.carbs;
+  bulkingCarbsMobile.value = `${userMacros.bulking.carbs}g`;
+  bulkingFats.innerText = userMacros.bulking.fats;
+  bulkingFatsMobile.value = `${userMacros.bulking.fats}g`;
+}
