@@ -15,6 +15,7 @@ const female = document.querySelector('#female');
 const btnSubmit = document.querySelector('#btn-submit');
 const sexRadios = document.getElementsByName('sex');
 // OUTPUTS
+// const bodyStatsResults = document.querySelector('#body-stats-results');
 // Cutting
 const cuttingCalsMobile = document.querySelector('#cutting-calories-mobile');
 const cuttingProteinMobile = document.querySelector('#cutting-protein-mobile');
@@ -84,16 +85,11 @@ const userMacros = {
 
 };
 
-// Initialize form and displays when page loads
+// Initialize values and displays when page loads
 window.onload = function() {
   inputForm.reset();
-  clearDisplay(loading);
-  clearDisplay(results);
-}
-
-// Remove the 'display' class from DOM element
-function clearDisplay(element) {
-  element.classList.remove('display');
+  loading.classList.remove('display');
+  results.classList.remove('display');
 }
 
 // Event listener for the submit button
@@ -119,23 +115,23 @@ function validate() {
   let errors = false;
   // Invalid age
   if (age.value === NaN || age.value < 1 || age.value > 123) {
-    console.log(`Invalid age: ${age.value}`);
+    console.log(`Invalid age: ${typeof(age.value)}`);
     errors = throwError();
   }
   // Invalid height
   if (height.value === NaN || height.value < 20 || height.value > 273) {
-    console.log(`Invalid height: ${height.value}`);
+    console.log(`Invalid height: ${typeof(height.value)}`);
     errors = throwError();
   }
   // Invalid weight
   if (weight.value === NaN || weight.value < 3 || weight.value > 1401) {
-    console.log(`Invalid weight: ${weight.value}`);
+    console.log(`Invalid weight: ${typeof(weight.value)}`);
     errors = throwError();
   }
   // If errors, hide UI elements and return false
   if (errors) {
-    clearDisplay(loading);
-    clearDisplay(results);
+    loading.classList.remove('display');
+    results.classList.remove('display');
     return false;
   } 
   // If no errors, clear error display and return true
@@ -262,6 +258,8 @@ function calculateMacros() {
 
 // Display calorie and macro values to the DOM
 function displayMacros(){
+  // Body Stats
+  // bodyStatsResults.textContent = `${userBodyStats.age} || ${userBodyStats.weight} || ${userBodyStats.weight}`
   // Cutting
   cuttingCals.innerText = userMacros.cutting.calories;
   cuttingCalsMobile.value = `${userMacros.cutting.calories} kcal`;
