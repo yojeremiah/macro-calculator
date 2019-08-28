@@ -2,6 +2,7 @@
 const loading = document.querySelector('.loading-container');
 const results = document.querySelector('.results-container');
 const inputForm = document.querySelector('.form');
+const errorMsg = document.querySelector('#error-msg');
 // INPUTS
 const metric = document.querySelector('#metric');
 const imperial = document.querySelector('#imperial');
@@ -86,8 +87,13 @@ const userMacros = {
 // Initialize form and displays when page loads
 window.onload = function() {
   inputForm.reset();
-  loading.classList.remove('display');
-  results.classList.remove('display');
+  clearDisplay(loading);
+  clearDisplay(results);
+}
+
+// Remove the 'display' class from DOM element
+function clearDisplay(element) {
+  element.classList.remove('display');
 }
 
 // Event listener for the submit button
@@ -95,17 +101,57 @@ btnSubmit.addEventListener('click', submit);
 
 // Main function (calls all sub-functions)
 function submit(e) {
-  parseInputs(e);
-  calculateTDEE()
-  calculateMacros();
-  displayMacros();
-  showResults();
+  // Prevent default submit action
+  e.preventDefault();
+
+  // Calculate macros if inputs are valid
+  if(validate()){
+    parseInputs();
+    calculateTDEE()
+    calculateMacros();
+    displayMacros();
+    showResults();
+  }
+}
+
+// Validate inputs
+function validate() {
+  let errors = false;
+  // Invalid age
+  if (age.value === NaN || age.value < 1 || age.value > 123) {
+    console.log(`Invalid age: ${age.value}`);
+    errors = throwError();
+  }
+  // Invalid height
+  if (height.value === NaN || height.value < 20 || height.value > 273) {
+    console.log(`Invalid height: ${height.value}`);
+    errors = throwError();
+  }
+  // Invalid weight
+  if (weight.value === NaN || weight.value < 3 || weight.value > 1401) {
+    console.log(`Invalid weight: ${weight.value}`);
+    errors = throwError();
+    errors = true;
+  }
+  // Check if any errors were thrown
+  if (!errors) {
+    errorMsg.style.display = 'none';
+    return true;
+  } else {
+    clearDisplay(loading);
+    clearDisplay(results);
+    return false;
+  }
+}
+
+// Throw an error message to the screen
+function throwError() {
+  errorMsg.style.display = 'block';
+  return true;
 }
 
 // Parse form inputs for user body stats
-function parseInputs(e) {
-  // Prevent default submit action
-  e.preventDefault();
+function parseInputs() {
   // Store input values in user-info object
   // Units of measurement
   for (let i = 0; i < unitRadios.length; i++) {

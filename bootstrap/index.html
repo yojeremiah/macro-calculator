@@ -46,6 +46,7 @@
                 id="metric"
                 value="metric"
                 checked
+                required
               />
               <label for="metric" class="form-check-label"
                 >Metric (cm/kg)</label
@@ -59,6 +60,7 @@
                 name="units"
                 id="imperial"
                 value="imperial"
+                required
               />
               <label for="metric" class="form-check-label"
                 >Imperial (in/lb)</label
@@ -70,6 +72,9 @@
           <form class="p-2 p-sm-3 form">
             <div class="form-header text-center">
               <h3>Body Stats</h3>
+              <p id="error-msg" class="text-danger mb-2">
+                <small>Please check your inputs!</small>
+              </p>
             </div>
 
             <!-- Age Input -->
@@ -80,6 +85,7 @@
                 class="form-control"
                 id="age"
                 placeholder="Current age"
+                required
               />
               <small id="age-help" class="form-text text-muted"
                 >Enter your current age (in years)</small
@@ -93,6 +99,7 @@
                 class="form-control"
                 id="height"
                 placeholder="Current height"
+                required
               />
               <small id="height-help" class="form-text text-muted"
                 >Enter your current height (in centimeters or inches)</small
@@ -106,6 +113,7 @@
                 class="form-control"
                 id="weight"
                 placeholder="Current weight"
+                required
               />
               <small id="weight-help" class="form-text text-muted"
                 >Enter your current weight (in kilograms or pounds)</small
@@ -124,6 +132,7 @@
                     id="male"
                     value="male"
                     checked
+                    required
                   />
                   <label for="male" class="form-check-label">Male</label>
                 </div>
@@ -135,6 +144,7 @@
                     name="sex"
                     id="female"
                     value="female"
+                    required
                   />
                   <label for="female" class="form-check-label">Female</label>
                 </div>
