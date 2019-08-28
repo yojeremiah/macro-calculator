@@ -183,7 +183,7 @@ function calculateTDEE() {
 function calculateMacros() {
   // Cutting
   // 500 calorie deficit
-  userMacros.cutting.calories = userMacros.tdee - 500;
+  userMacros.cutting.calories = Math.floor(userMacros.tdee - 500);
   // 2.2g/kg or 1g/lb protein
   userMacros.cutting.protein = (userBodyStats.units === 'metric') ? Math.floor(userBodyStats.weight * 2.2) : userBodyStats.weight * 1;
   // .25% of total calories for fats (9cals in 1g of fats)
@@ -194,7 +194,7 @@ function calculateMacros() {
 
   // Maintenance
   // No calorie deficit
-  userMacros.maintain.calories = userMacros.tdee;
+  userMacros.maintain.calories = Math.floor(userMacros.tdee);
   // 2.2g/kg or 1g/lb protein
   userMacros.maintain.protein = (userBodyStats.units === 'metric') ? Math.floor(userBodyStats.weight * 2.2) : userBodyStats.weight * 1;
   // .25% of total calories for fats (9cals in 1g of fats)
@@ -204,7 +204,7 @@ function calculateMacros() {
 
   // Bulking
   // 250 calorie surplus
-  userMacros.bulking.calories = userMacros.tdee + 250;
+  userMacros.bulking.calories = Math.floor(userMacros.tdee + 250);
   // 2.2g/kg or 1g/lb protein
   userMacros.bulking.protein = (userBodyStats.units === 'metric') ? Math.floor(userBodyStats.weight * 2.2) : userBodyStats.weight * 1;
   // .25% of total calories for fats (9cals in 1g of fats)
