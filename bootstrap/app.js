@@ -110,7 +110,7 @@ function submit(e) {
     calculateTDEE()
     calculateMacros();
     displayMacros();
-    showResults();
+    loadResults();
   }
 }
 
@@ -131,16 +131,17 @@ function validate() {
   if (weight.value === NaN || weight.value < 3 || weight.value > 1401) {
     console.log(`Invalid weight: ${weight.value}`);
     errors = throwError();
-    errors = true;
   }
-  // Check if any errors were thrown
-  if (!errors) {
-    errorMsg.style.display = 'none';
-    return true;
-  } else {
+  // If errors, hide UI elements and return false
+  if (errors) {
     clearDisplay(loading);
     clearDisplay(results);
     return false;
+  } 
+  // If no errors, clear error display and return true
+  else {
+    errorMsg.style.display = 'none';
+    return true;
   }
 }
 
@@ -291,10 +292,15 @@ function displayMacros(){
 }
 
 // Display the loading and results messages
-function showResults() {
-  loading.classList.toggle('display');
+function loadResults() {
+  // Clear previous results
+  results.classList.remove('display');
+  // Display loading for 2 seconds
+  loading.classList.add('display');
   setTimeout(function() {
-    loading.classList.toggle('display');
-    results.classList.toggle('display');
+    // Hide loading
+    loading.classList.remove('display');
+    // Display new results
+    results.classList.add('display');
   }, 2000);
 }
